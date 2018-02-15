@@ -1,0 +1,171 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>An Example of Hierarchic Data &#8212; tableprinter 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">tableprinter 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="an-example-of-hierarchic-data">
+<span id="example-hierarchic"></span><h1>An Example of Hierarchic Data<a class="headerlink" href="#an-example-of-hierarchic-data" title="Permalink to this headline">¶</a></h1>
+<p><strong>Note</strong>: This is a (somewhat ugly) export of an Jupyter notebook that can be found in the “examples” folder.</p>
+<div class="code ipython3 highlight-default"><div class="highlight"><pre><span></span><span class="c1"># This is only necessary to execute this notebook from the examples folder.</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
+
+<span class="kn">from</span> <span class="nn">tableprinter</span> <span class="k">import</span> <span class="n">Tableprinter</span>
+
+<span class="c1"># For displaying the HTML output directly in the notebook</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
+</pre></div>
+</div>
+<div class="code ipython3 highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Generate hierarchic data. x1 and x2 are the two x-coordinates. y1, y2 and y3 are three levels of y-coordinates.</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;x1&#39;</span><span class="p">:</span> <span class="n">x1</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">:</span> <span class="n">x2</span><span class="p">,</span> <span class="s1">&#39;y1&#39;</span><span class="p">:</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;y2&#39;</span><span class="p">:</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;y3&#39;</span><span class="p">:</span> <span class="n">y3</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">-</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="n">y3</span><span class="p">)}</span>
+    <span class="k">for</span> <span class="n">x1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x2</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">y1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">y2</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">y3</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="c1"># Not all cells have to be present</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code ipython3 highlight-default"><div class="highlight"><pre><span></span><span class="n">tp</span> <span class="o">=</span> <span class="n">Tableprinter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x_dimensions</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span><span class="s1">&#39;x2&#39;</span><span class="p">),</span> <span class="n">y_dimensions</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;y1&#39;</span><span class="p">,</span><span class="s1">&#39;y2&#39;</span><span class="p">,</span><span class="s1">&#39;y3&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="code ipython3 highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tp</span><span class="o">.</span><span class="n">as_text</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+======+===========+===========+===========+===========+</span>
+<span class="o">|</span>      <span class="o">|</span>           <span class="n">a</span>           <span class="o">|</span>           <span class="n">b</span>           <span class="o">|</span>
+<span class="o">|</span>      <span class="o">|</span>     <span class="mi">1</span>     <span class="o">|</span>     <span class="mi">2</span>     <span class="o">|</span>     <span class="mi">1</span>     <span class="o">|</span>     <span class="mi">2</span>     <span class="o">|</span>
+<span class="o">+======+===========+===========+===========+===========+</span>
+<span class="o">|</span>    <span class="n">i</span> <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">--+-----------+-----------+-----------+-----------+</span>
+<span class="o">|</span>    <span class="n">j</span> <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span>
+<span class="o">|</span><span class="n">x</span> <span class="o">----+-----------+-----------+-----------+-----------+</span>
+<span class="o">|</span>    <span class="n">i</span> <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">4</span> <span class="o">--+-----------+-----------+-----------+-----------+</span>
+<span class="o">|</span>    <span class="n">j</span> <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span>
+<span class="o">|------+-----------+-----------+-----------+-----------+</span>
+<span class="o">|</span>    <span class="n">i</span> <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">--+-----------+-----------+-----------+-----------+</span>
+<span class="o">|</span>    <span class="n">j</span> <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span>
+<span class="o">|</span><span class="n">y</span> <span class="o">----+-----------+-----------+-----------+-----------+</span>
+<span class="o">|</span>    <span class="n">i</span> <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">i</span>  <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">4</span> <span class="o">--+-----------+-----------+-----------+-----------+</span>
+<span class="o">|</span>    <span class="n">j</span> <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">j</span>  <span class="o">|--</span>         <span class="o">|</span><span class="n">b</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">/</span><span class="mi">4</span><span class="o">/</span><span class="n">j</span>  <span class="o">|</span>
+<span class="o">+======+===========+===========+===========+===========+</span>
+</pre></div>
+</div>
+<div class="code ipython3 highlight-default"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="n">tp</span><span class="o">.</span><span class="n">as_html</span><span class="p">())</span>
+</pre></div>
+</div>
+<table class = "tableprinted">
+        <tr> <th class="toplabel" colspan="3"></th><th colspan="2" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">a</div></th><th colspan="2" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">b</div></th></tr>
+<tr> <th class="toplabel" colspan="3"></th><th colspan="1" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">1</div></th><th colspan="1" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">2</div></th><th colspan="1" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">1</div></th><th colspan="1" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">2</div></th></tr>
+<tr><th class="leftlabel" rowspan="4" style="">x</td><th class="leftlabel" rowspan="2" style="">3</td><th class="leftlabel" rowspan="1" style="">i</td><td class="content" style="">a/1-x/3/i</td><td class="content" style="">a/2-x/3/i</td><td class="content" style="">b/1-x/3/i</td><td class="content" style="">b/2-x/3/i</td></tr>
+<tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="">a/1-x/3/j</td><td class="content" style="">a/2-x/3/j</td><td class="content" style="">b/1-x/3/j</td><td class="content" style="">b/2-x/3/j</td></tr>
+<tr><th class="leftlabel" rowspan="2" style="border-top: 1px solid black;">4</td><th class="leftlabel" rowspan="1" style="border-top: 1px solid black;">i</td><td class="content" style="">a/1-x/4/i</td><td class="content" style="">a/2-x/4/i</td><td class="content" style="">b/1-x/4/i</td><td class="content" style="">b/2-x/4/i</td></tr>
+<tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="">a/1-x/4/j</td><td class="content" style="">a/2-x/4/j</td><td class="content" style="">b/1-x/4/j</td><td class="content" style="">b/2-x/4/j</td></tr>
+<tr><th class="leftlabel" rowspan="4" style="border-top: 1px solid black;">y</td><th class="leftlabel" rowspan="2" style="border-top: 1px solid black;">3</td><th class="leftlabel" rowspan="1" style="border-top: 1px solid black;">i</td><td class="content" style="">a/1-y/3/i</td><td class="content" style="">a/2-y/3/i</td><td class="content" style="">b/1-y/3/i</td><td class="content" style="">b/2-y/3/i</td></tr>
+<tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="">a/1-y/3/j</td><td class="content" style="">a/2-y/3/j</td><td class="content" style="">b/1-y/3/j</td><td class="content" style="">b/2-y/3/j</td></tr>
+<tr><th class="leftlabel" rowspan="2" style="border-top: 1px solid black;">4</td><th class="leftlabel" rowspan="1" style="border-top: 1px solid black;">i</td><td class="content" style="">a/1-y/4/i</td><td class="content" style="">a/2-y/4/i</td><td class="content" style="">b/1-y/4/i</td><td class="content" style="">b/2-y/4/i</td></tr>
+<tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="">a/1-y/4/j</td><td class="content" style="">a/2-y/4/j</td><td class="content empty">--</td><td class="content" style="">b/2-y/4/j</td></tr>
+</table><div class="code ipython3 highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tp</span><span class="o">.</span><span class="n">as_latex</span><span class="p">())</span>
+</pre></div>
+</div>
+<pre class="literal-block">
+begin{tabular}{ rrrcccc }
+toprule
+multicolumn{ 3 }{c}{  } &amp; multicolumn{ 2 }{c}{ a } &amp; multicolumn{ 2 }{c}{ b } \
+cmidrule(lr){ 4 - 5 } cmidrule(lr){ 6 - 7 }
+multicolumn{ 3 }{c}{  } &amp; 1&amp; 2&amp; 1&amp; 2\
+
+midrule
+multirow{ 4 }{*}{x} &amp; multirow{ 2 }{*}{3} &amp; multirow{ 1 }{*}{i} &amp; a/1-x/3/i &amp; a/2-x/3/i &amp; b/1-x/3/i &amp; b/2-x/3/i\
+ &amp;  &amp; multirow{ 1 }{*}{j} &amp; a/1-x/3/j &amp; a/2-x/3/j &amp; b/1-x/3/j &amp; b/2-x/3/j\
+cmidrule(lr){ 2 - 3 } \
+ &amp; multirow{ 2 }{*}{4} &amp; multirow{ 1 }{*}{i} &amp; a/1-x/4/i &amp; a/2-x/4/i &amp; b/1-x/4/i &amp; b/2-x/4/i\
+ &amp;  &amp; multirow{ 1 }{*}{j} &amp; a/1-x/4/j &amp; a/2-x/4/j &amp; b/1-x/4/j &amp; b/2-x/4/j\
+cmidrule(lr){ 1 - 3 } \
+multirow{ 4 }{*}{y} &amp; multirow{ 2 }{*}{3} &amp; multirow{ 1 }{*}{i} &amp; a/1-y/3/i &amp; a/2-y/3/i &amp; b/1-y/3/i &amp; b/2-y/3/i\
+ &amp;  &amp; multirow{ 1 }{*}{j} &amp; a/1-y/3/j &amp; a/2-y/3/j &amp; b/1-y/3/j &amp; b/2-y/3/j\
+cmidrule(lr){ 2 - 3 } \
+ &amp; multirow{ 2 }{*}{4} &amp; multirow{ 1 }{*}{i} &amp; a/1-y/4/i &amp; a/2-y/4/i &amp; b/1-y/4/i &amp; b/2-y/4/i\
+ &amp;  &amp; multirow{ 1 }{*}{j} &amp; a/1-y/4/j &amp; a/2-y/4/j &amp; -- &amp; b/2-y/4/j\
+
+bottomrule
+end{tabular}
+</pre>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">tableprinter 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Lukas Barth.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>

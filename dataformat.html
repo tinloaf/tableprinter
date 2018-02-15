@@ -1,0 +1,147 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Data Format &#8212; tableprinter 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Welcome to Tableprinter’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Tableprinter’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">tableprinter 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="data-format">
+<h1>Data Format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h1>
+<p>You supply data to Tableprinter as a list of dictionaries. Each dictionary
+corresponds to one table cell. Options in Tableprinter’s constructor(TODO LINK)
+control which field in the dictionaries determines the row, column, content,
+color etc. of the table cell. Therefore, you should really read the documentation
+on Tableprinter’s constructor(TODO LINK).</p>
+<p>Here’s a quick overview over what can be specified for each cell:</p>
+<div class="section" id="cell-data">
+<h2>Cell Data<a class="headerlink" href="#cell-data" title="Permalink to this headline">¶</a></h2>
+<p>In the following, <cite>d</cite> always stands for the dictionary of the cell we are
+interested about. Please also note that the field names below are just default
+values which can be overriden via the options in Tableprinter’s constructor(TODO LINK).
+Where we specify &lt;fields&gt; as field names, no defaults exist and the name(s)
+of these field(s) <em>must</em> be specified in the constructor.</p>
+<dl class="option">
+<dt id="cmdoption-arg-content">
+<code class="descname">content</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-arg-content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the content of the cell. If you don’t specify a formatter(TODO LINK)
+or an aggregator(TODO LINK), <cite>str(d[‘content’])</cite> will become the content
+of the cell. A special formatting rule applies to floats.(TODO LINK)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-arg-column-fields">
+<code class="descname">&lt;column-fields&gt;</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-arg-column-fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>For every field in your column option(TODO LINK), the value determines in which
+column the cell will be placed. See TODO LINK for details. Note that this is
+usually exactly one field, unless you have hierarchic columns(TODO LINK).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-arg-row-fields">
+<code class="descname">&lt;row-fields&gt;</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-arg-row-fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>For every field in your row option(TODO LINK), the value determines in which
+row the cell will be placed. See TODO LINK for details. Note that this is
+usually exactly one field, unless you have hierarchic rows(TODO LINK).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-arg-color">
+<code class="descname">color</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-arg-color" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <cite>d[‘color’]</cite> is present, we expect it to contain a hexadecimal RGB value
+(like <cite>#012345</cite>). This RGB value will be used as background color for the
+cell</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Tableprinter’s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">API</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Tableprinter’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">tableprinter 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Lukas Barth.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+    </div>
+  </body>
+</html>
