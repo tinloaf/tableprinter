@@ -3,14 +3,14 @@ Tableprinter
 
 Tableprinter is a small python module that allows you to print your data in tables, be it as ASCII table, HTML table or
 LaTeX tabular. It allows for hierarchical columns and rows (see the hierarchical example below). To jump right in, you can have
-a look at the examples below, or you can read the documentation TODO.
+a look at the examples below, or you can read the [documentation](https://tinloaf.github.io/tableprinter/).
 
 Examples
 ========
 
 Data is passed to tableprinter as a list of dictionaries. Each dictionary represents one cell of your table, and must
 contain fields that specify the content of the table, as well as which row and column the cell should be in. More
-options can be specified for each cell, which you can find in the documentation TODO.
+options can be specified for each cell, which you can find in the [documentation](https://tinloaf.github.io/tableprinter/).
 
 A simple first example
 ----------------------
@@ -188,7 +188,7 @@ print(tp.as_latex())
     \multicolumn{ 3 }{c}{  } & \multicolumn{ 2 }{c}{ a } & \multicolumn{ 2 }{c}{ b } \\
     \cmidrule(lr){ 4 - 5 } \cmidrule(lr){ 6 - 7 }
     \multicolumn{ 3 }{c}{  } & 1& 2& 1& 2\\
-    
+
     \midrule
     \multirow{ 4 }{*}{x} & \multirow{ 2 }{*}{3} & \multirow{ 1 }{*}{i} & a/1-x/3/i & a/2-x/3/i & b/1-x/3/i & b/2-x/3/i\\
      &  & \multirow{ 1 }{*}{j} & a/1-x/3/j & a/2-x/3/j & b/1-x/3/j & b/2-x/3/j\\
