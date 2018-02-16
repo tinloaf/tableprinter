@@ -9,7 +9,8 @@ class ASCIIPrinter(Tabulator):
         self._ascii_colwidths = None
 
     ASCII_DEFAULT_OPTIONS = {
-        'float_places': 2
+        'float_places': 2,
+        'cell-align-horizontal': 'c',
     }
 
     def _ascii_format_cell(self, contents, options):
@@ -168,6 +169,8 @@ class ASCIIPrinter(Tabulator):
         # TODO don't generate this for every row…
         border = "|" + " " * (self._ascii_colwidths[0]) + "+"
 
+        cell_align = options.get('cell-align-horizontal', 'c')
+
         for col_no, col in enumerate(sorted_cols, start=1):
             border += "-" * (self._ascii_colwidths[col_no]) + "+"
 
@@ -180,6 +183,17 @@ class ASCIIPrinter(Tabulator):
 
             coord_x = self._ascii_col_position(col_no)
             for (line_offset, line) in enumerate(cell_str.split("\n")):
+                space = self._ascii_colwidths[col_no] - len(line)
+                if (cell_align == 'l'):
+                    # Just one space to the left TODO padding?
+                    coord_x += 1
+                elif (cell_align == 'r'):
+                    # Just one space to the right
+                    coord_x += (space - 1)
+                else:
+                    # center
+                    coord_x += int(space/2)
+
                 self._ascii_print_to_matrix(coord_x, coord_y + line_offset, line)
 
 

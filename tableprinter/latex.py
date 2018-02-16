@@ -35,16 +35,21 @@ class LatexPrinter(Tabulator):
 
     LATEX_DEFAULT_FORMAT = {
         'float_format': None,
-        'float_places': 2
+        'float_places': 2,
+        'cell-align-horizontal': 'c'
     }
 
-    def as_latex(self, options = LATEX_DEFAULT_FORMAT):
+    def as_latex(self, options=LATEX_DEFAULT_FORMAT):
         sorted_rows, left_labels = self._make_rows()
         sorted_cols, top_labels = self._make_cols()
 
         left_label_count = len(left_labels)
 
-        column_str = "r" * left_label_count + "c" * len(sorted_cols)
+        cell_align = options.get('cell-align-horizontal', 'c')
+        if cell_align not in ('c', 'l', 'r'):
+            cell_align = 'c'
+
+        column_str = "r" * left_label_count + cell_align * len(sorted_cols)
 
         latex_str = ""
 

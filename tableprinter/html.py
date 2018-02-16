@@ -6,7 +6,8 @@ class HTMLPrinter(Tabulator):
 
     HTML_DEFAULT_OPTIONS = {
         'table_class': 'tableprinted',
-        'float_places': 2
+        'float_places': 2,
+        'cell-align-horizontal': 'c',
     }
 
     def _html_format_cell(self, contents, options):
@@ -30,6 +31,14 @@ class HTMLPrinter(Tabulator):
             rgb_scaled = (int(255 * x) for x in contents['color'])
             color_str = "".join(map(lambda x : hex(x)[2:], rgb_scaled))
             style += "background-color: #{}".format(color_str)
+
+        cell_align = options.get('cell-align-horizontal', 'c')
+        if cell_align == 'r':
+            style += "text-align: right;"
+        elif cell_align == 'l':
+            style += "text-align: left;"
+        else:
+            style += "text-align: center;"
 
         cell_str = "<td class=\"content\" style=\"{}\">".format(style)
         cell_str += format_val(contents[self._value_dimension])
@@ -62,7 +71,7 @@ class HTMLPrinter(Tabulator):
             for (key, colspan) in top_labels[i]:
                 col_label = self._x_labels[i].get('values', {}).get(key, key)
 
-                cell_style_str = "text-align: center; padding: 0px;"
+                cell_style_str = "padding: 0px; text-align: center;"
 
                 div_style_str = "border-bottom: 1px solid black;"
                 div_style_str += "margin-left: 3px; margin-right: 7px;"
@@ -103,6 +112,7 @@ class HTMLPrinter(Tabulator):
                     row_label = self._y_labels[d].get('values', {}).get(label, label)
 
                     cell_style = ""
+
                     if (d < len(left_labels) - 1 or top_bordered) and (row_no > 1):
                         cell_style += "border-top: 1px solid black;"
                         top_bordered = True
