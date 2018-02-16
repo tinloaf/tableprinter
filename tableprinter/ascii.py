@@ -73,15 +73,15 @@ class ASCIIPrinter(Tabulator):
     _ASCII_CHARS = {
         'bold':
             {(True, True, True, True): '#',
-             (True, True, True, False): '+',
-             (True, True, False, True): '+',
+             (True, True, True, False): '#',
+             (True, True, False, True): '#',
              (True, True, False, False): '#',
-             (True, False, True, True): '+',
+             (True, False, True, True): '#',
              (True, False, True, False): '|',
-             (True, False, False, True): '+',
+             (True, False, False, True): '#',
              (True, False, False, False): '|',
-             (False, True, True, True): '+',
-             (False, True, True, False): '+',
+             (False, True, True, True): '#',
+             (False, True, True, False): '#',
              (False, True, False, True): '=',
              (False, True, False, False): '=',
              (False, False, True, True): '#',
@@ -390,3 +390,13 @@ class ASCIIPrinter(Tabulator):
         ascii_str = "".join(with_breaks)
 
         return ascii_str
+
+    def as_ascii(self, options=ASCII_DEFAULT_OPTIONS):
+        opts = dict(options)
+        opts['enable_unicode'] = False
+        return self.as_text(opts)
+
+    def as_unicode(self, options=ASCII_DEFAULT_OPTIONS):
+        opts = dict(options)
+        opts['enable_unicode'] = True
+        return self.as_text(opts)
