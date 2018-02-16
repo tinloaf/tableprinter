@@ -10,7 +10,7 @@ In the :ref:`example with hierarchic data <_example_hierarchic>` you learn how y
 more than two dimensions.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 0
    :caption: Available Examples:
 
    example_simple
