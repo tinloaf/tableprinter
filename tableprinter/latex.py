@@ -40,6 +40,15 @@ class LatexPrinter(Tabulator):
     }
 
     def as_latex(self, options=LATEX_DEFAULT_FORMAT):
+        """
+        Formats the table as a LaTeX tabular.
+
+        Note that you still need to wrap everything into a table environment. See the :ref:`LaTeX output description <output_latex>`
+        for details on available options and limitations.
+
+        :param options:  Formatting options. See the :ref:`formatting options documentation <output_formats>` for details.
+        :return: A LaTeX tabular environment
+        """
         sorted_rows, left_labels = self._make_rows()
         sorted_cols, top_labels = self._make_cols()
 
