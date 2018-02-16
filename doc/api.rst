@@ -7,3 +7,5 @@ API
    :members:
 
    .. automethod:: __init__
+
+   .. automethod:: as_latex
