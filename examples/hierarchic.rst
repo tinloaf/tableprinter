@@ -28,31 +28,31 @@
 
 .. code:: ipython3
 
-    print(tp.as_text())
+    print(tp.as_unicode())
 
 
 .. parsed-literal::
 
-    +======+===========+===========+===========+===========+
-    |      |           a           |           b           |
-    |      |     1     |     2     |     1     |     2     |
-    +======+===========+===========+===========+===========+
-    |    i |a/1-x/3/i  |a/2-x/3/i  |b/1-x/3/i  |b/2-x/3/i  |
-    |  3 --+-----------+-----------+-----------+-----------+
-    |    j |a/1-x/3/j  |a/2-x/3/j  |b/1-x/3/j  |b/2-x/3/j  |
-    |x ----+-----------+-----------+-----------+-----------+
-    |    i |a/1-x/4/i  |a/2-x/4/i  |b/1-x/4/i  |b/2-x/4/i  |
-    |  4 --+-----------+-----------+-----------+-----------+
-    |    j |a/1-x/4/j  |a/2-x/4/j  |b/1-x/4/j  |b/2-x/4/j  |
-    |------+-----------+-----------+-----------+-----------+
-    |    i |a/1-y/3/i  |a/2-y/3/i  |b/1-y/3/i  |b/2-y/3/i  |
-    |  3 --+-----------+-----------+-----------+-----------+
-    |    j |a/1-y/3/j  |a/2-y/3/j  |b/1-y/3/j  |b/2-y/3/j  |
-    |y ----+-----------+-----------+-----------+-----------+
-    |    i |a/1-y/4/i  |a/2-y/4/i  |b/1-y/4/i  |b/2-y/4/i  |
-    |  4 --+-----------+-----------+-----------+-----------+
-    |    j |a/1-y/4/j  |a/2-y/4/j  |--         |b/2-y/4/j  |
-    +======+===========+===========+===========+===========+
+    ┏━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+    ┃      ┃           a           ┃           b           ┃
+    ┃      ┃     1     ┃     2     ┃     1     ┃     2     ┃
+    ┣━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
+    │    i │ a/1-x/3/i │ a/2-x/3/i │ b/1-x/3/i │ b/2-x/3/i │
+    │  3 ──├───────────┼───────────┼───────────┼───────────┤
+    │    j │ a/1-x/3/j │ a/2-x/3/j │ b/1-x/3/j │ b/2-x/3/j │
+    │x ────├───────────┼───────────┼───────────┼───────────┤
+    │    i │ a/1-x/4/i │ a/2-x/4/i │ b/1-x/4/i │ b/2-x/4/i │
+    │  4 ──├───────────┼───────────┼───────────┼───────────┤
+    │    j │ a/1-x/4/j │ a/2-x/4/j │ b/1-x/4/j │ b/2-x/4/j │
+    │──────├───────────┼───────────┼───────────┼───────────┤
+    │    i │ a/1-y/3/i │ a/2-y/3/i │ b/1-y/3/i │ b/2-y/3/i │
+    │  3 ──├───────────┼───────────┼───────────┼───────────┤
+    │    j │ a/1-y/3/j │ a/2-y/3/j │ b/1-y/3/j │ b/2-y/3/j │
+    │y ────├───────────┼───────────┼───────────┼───────────┤
+    │    i │ a/1-y/4/i │ a/2-y/4/i │ b/1-y/4/i │ b/2-y/4/i │
+    │  4 ──├───────────┼───────────┼───────────┼───────────┤
+    │    j │ a/1-y/4/j │ a/2-y/4/j │    --     │ b/2-y/4/j │
+    └──────┴───────────┴───────────┴───────────┴───────────┘
     
 
 
@@ -67,19 +67,22 @@
 
     
     <table class = "tableprinted">
-            <tr> <th class="toplabel" colspan="3"></th><th colspan="2" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">a</div></th><th colspan="2" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">b</div></th></tr>
-    <tr> <th class="toplabel" colspan="3"></th><th colspan="1" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">1</div></th><th colspan="1" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">2</div></th><th colspan="1" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">1</div></th><th colspan="1" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">2</div></th></tr>
-    <tr><th class="leftlabel" rowspan="4" style="">x</td><th class="leftlabel" rowspan="2" style="">3</td><th class="leftlabel" rowspan="1" style="">i</td><td class="content" style="">a/1-x/3/i</td><td class="content" style="">a/2-x/3/i</td><td class="content" style="">b/1-x/3/i</td><td class="content" style="">b/2-x/3/i</td></tr>
-    <tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="">a/1-x/3/j</td><td class="content" style="">a/2-x/3/j</td><td class="content" style="">b/1-x/3/j</td><td class="content" style="">b/2-x/3/j</td></tr>
-    <tr><th class="leftlabel" rowspan="2" style="border-top: 1px solid black;">4</td><th class="leftlabel" rowspan="1" style="border-top: 1px solid black;">i</td><td class="content" style="">a/1-x/4/i</td><td class="content" style="">a/2-x/4/i</td><td class="content" style="">b/1-x/4/i</td><td class="content" style="">b/2-x/4/i</td></tr>
-    <tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="">a/1-x/4/j</td><td class="content" style="">a/2-x/4/j</td><td class="content" style="">b/1-x/4/j</td><td class="content" style="">b/2-x/4/j</td></tr>
-    <tr><th class="leftlabel" rowspan="4" style="border-top: 1px solid black;">y</td><th class="leftlabel" rowspan="2" style="border-top: 1px solid black;">3</td><th class="leftlabel" rowspan="1" style="border-top: 1px solid black;">i</td><td class="content" style="">a/1-y/3/i</td><td class="content" style="">a/2-y/3/i</td><td class="content" style="">b/1-y/3/i</td><td class="content" style="">b/2-y/3/i</td></tr>
-    <tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="">a/1-y/3/j</td><td class="content" style="">a/2-y/3/j</td><td class="content" style="">b/1-y/3/j</td><td class="content" style="">b/2-y/3/j</td></tr>
-    <tr><th class="leftlabel" rowspan="2" style="border-top: 1px solid black;">4</td><th class="leftlabel" rowspan="1" style="border-top: 1px solid black;">i</td><td class="content" style="">a/1-y/4/i</td><td class="content" style="">a/2-y/4/i</td><td class="content" style="">b/1-y/4/i</td><td class="content" style="">b/2-y/4/i</td></tr>
-    <tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="">a/1-y/4/j</td><td class="content" style="">a/2-y/4/j</td><td class="content empty">--</td><td class="content" style="">b/2-y/4/j</td></tr>
+            <tr> <th class="toplabel" colspan="3"></th><th colspan="2" style="padding: 0px; text-align: center;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">a</div></th><th colspan="2" style="padding: 0px; text-align: center;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">b</div></th></tr>
+    <tr> <th class="toplabel" colspan="3"></th><th colspan="1" style="padding: 0px; text-align: center;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">1</div></th><th colspan="1" style="padding: 0px; text-align: center;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">2</div></th><th colspan="1" style="padding: 0px; text-align: center;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">1</div></th><th colspan="1" style="padding: 0px; text-align: center;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">2</div></th></tr>
+    <tr><th class="leftlabel" rowspan="4" style="">x</td><th class="leftlabel" rowspan="2" style="">3</td><th class="leftlabel" rowspan="1" style="">i</td><td class="content" style="text-align: center;">a/1-x/3/i</td><td class="content" style="text-align: center;">a/2-x/3/i</td><td class="content" style="text-align: center;">b/1-x/3/i</td><td class="content" style="text-align: center;">b/2-x/3/i</td></tr>
+    <tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="text-align: center;">a/1-x/3/j</td><td class="content" style="text-align: center;">a/2-x/3/j</td><td class="content" style="text-align: center;">b/1-x/3/j</td><td class="content" style="text-align: center;">b/2-x/3/j</td></tr>
+    <tr><th class="leftlabel" rowspan="2" style="border-top: 1px solid black;">4</td><th class="leftlabel" rowspan="1" style="border-top: 1px solid black;">i</td><td class="content" style="text-align: center;">a/1-x/4/i</td><td class="content" style="text-align: center;">a/2-x/4/i</td><td class="content" style="text-align: center;">b/1-x/4/i</td><td class="content" style="text-align: center;">b/2-x/4/i</td></tr>
+    <tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="text-align: center;">a/1-x/4/j</td><td class="content" style="text-align: center;">a/2-x/4/j</td><td class="content" style="text-align: center;">b/1-x/4/j</td><td class="content" style="text-align: center;">b/2-x/4/j</td></tr>
+    <tr><th class="leftlabel" rowspan="4" style="border-top: 1px solid black;">y</td><th class="leftlabel" rowspan="2" style="border-top: 1px solid black;">3</td><th class="leftlabel" rowspan="1" style="border-top: 1px solid black;">i</td><td class="content" style="text-align: center;">a/1-y/3/i</td><td class="content" style="text-align: center;">a/2-y/3/i</td><td class="content" style="text-align: center;">b/1-y/3/i</td><td class="content" style="text-align: center;">b/2-y/3/i</td></tr>
+    <tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="text-align: center;">a/1-y/3/j</td><td class="content" style="text-align: center;">a/2-y/3/j</td><td class="content" style="text-align: center;">b/1-y/3/j</td><td class="content" style="text-align: center;">b/2-y/3/j</td></tr>
+    <tr><th class="leftlabel" rowspan="2" style="border-top: 1px solid black;">4</td><th class="leftlabel" rowspan="1" style="border-top: 1px solid black;">i</td><td class="content" style="text-align: center;">a/1-y/4/i</td><td class="content" style="text-align: center;">a/2-y/4/i</td><td class="content" style="text-align: center;">b/1-y/4/i</td><td class="content" style="text-align: center;">b/2-y/4/i</td></tr>
+    <tr><th class="leftlabel" rowspan="1" style="">j</td><td class="content" style="text-align: center;">a/1-y/4/j</td><td class="content" style="text-align: center;">a/2-y/4/j</td><td class="content empty">--</td><td class="content" style="text-align: center;">b/2-y/4/j</td></tr>
     </table>
 
 
+
+*Note*: The produced HTML sets various ``class`` attributes and can
+therefore be arbitrarily styled.
 
 .. code:: ipython3
 

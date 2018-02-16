@@ -24,22 +24,30 @@
 
     tp = Tableprinter(data, x_dimensions=('x',), y_dimensions=('y',))
 
+Text Output
+===========
+
+print(tp.as\_ascii())
+
 .. code:: ipython3
 
-    print(tp.as_text())
+    print(tp.as_unicode())
 
 
 .. parsed-literal::
 
-    +==+=============+==============+
-    |  |      a      |      b       |
-    +==+=============+==============+
-    |1 |Top Left     |Top Right     |
-    |--+-------------+--------------+
-    |2 |Bottom Left  |Bottom Right  |
-    +==+=============+==============+
+    ┏━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+    ┃  ┃      a      ┃      b       ┃
+    ┣━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
+    │1 │  Top Left   │  Top Right   │
+    │──├─────────────┼──────────────┤
+    │2 │ Bottom Left │ Bottom Right │
+    └──┴─────────────┴──────────────┘
     
 
+
+HTML Output
+===========
 
 .. code:: ipython3
 
@@ -52,12 +60,21 @@
 
     
     <table class = "tableprinted">
-            <tr> <th class="toplabel" colspan="1"></th><th colspan="1" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">a</div></th><th colspan="1" style="text-align: center; padding: 0px;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">b</div></th></tr>
-    <tr><th class="leftlabel" rowspan="1" style="">1</td><td class="content" style="">Top Left</td><td class="content" style="">Top Right</td></tr>
-    <tr><th class="leftlabel" rowspan="1" style="">2</td><td class="content" style="">Bottom Left</td><td class="content" style="">Bottom Right</td></tr>
+            <tr> <th class="toplabel" colspan="1"></th><th colspan="1" style="padding: 0px; text-align: center;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">a</div></th><th colspan="1" style="padding: 0px; text-align: center;"><div style="border-bottom: 1px solid black;margin-left: 3px; margin-right: 7px;">b</div></th></tr>
+    <tr><th class="leftlabel" rowspan="1" style="">1</td><td class="content" style="text-align: center;">Top Left</td><td class="content" style="text-align: center;">Top Right</td></tr>
+    <tr><th class="leftlabel" rowspan="1" style="">2</td><td class="content" style="text-align: center;">Bottom Left</td><td class="content" style="text-align: center;">Bottom Right</td></tr>
     </table>
 
 
+
+*Note*: The produced HTML sets various ``class`` attributes and can
+therefore be arbitrarily styled.
+
+LaTeX Output
+============
+
+*Note*: LaTeX output only produces the tabular environment. You probably
+want to wrap it into a table environment.
 
 .. code:: ipython3
 
