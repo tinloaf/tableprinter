@@ -4,28 +4,19 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Welcome to Tableprinter’s documentation! &#8212; tableprinter 0.1 documentation</title>
+    <title>Welcome to Tableprinter’s documentation! &#8212; tableprinter 0.2 documentation</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Data Format" href="dataformat.html" /> 
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -35,7 +26,7 @@
         <li class="right" >
           <a href="dataformat.html" title="Data Format"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">tableprinter 0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">tableprinter 0.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -46,17 +37,50 @@
             
   <div class="section" id="welcome-to-tableprinter-s-documentation">
 <h1>Welcome to Tableprinter’s documentation!<a class="headerlink" href="#welcome-to-tableprinter-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Tableprinter is a small python module that allows you to print your data in tables, be it as ASCII table, HTML table or
+<p>Tableprinter is a small python module that allows you to print your data in tables, be it as ASCII or Unicode table, HTML table or
 LaTeX tabular. It allows for hierarchical columns and rows (see an example TODO of this). To jump right in, you can have
-a look at the <a class="reference internal" href="#examples"><span class="std std-ref">examples</span></a>, or you can read the <a class="reference internal" href="api.html#api"><span class="std std-ref">API docs</span></a>.</p>
+a look at the <a class="reference internal" href="examples.html#examples"><span class="std std-ref">examples</span></a>, or you can read the <a class="reference internal" href="api.html#api"><span class="std std-ref">API docs</span></a>.</p>
+</div>
+<div class="section" id="big-picture">
+<h1>Big Picture<a class="headerlink" href="#big-picture" title="Permalink to this headline">¶</a></h1>
+<p>You supply the Tableprinter with your data as a list of dictionaries. Every dictionary becomes one cell of the table.
+Together with the list of dictionaries, you provide the constructor with a list of options describing your data.
+See the <a class="reference internal" href="api.html#tableprinter.Tableprinter.__init__" title="tableprinter.Tableprinter.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">constructor</span> <span class="pre">documentation</span></code></a>. Then, you can call various
+<cite>as_&lt;format&gt;</cite> methods, which produce output in the requested format. Each of these methods accepts a list of options
+controlling various specifics of the output formatting. See the the <a class="reference internal" href="output_formats.html#output-formats"><span class="std std-ref">output format documentation</span></a>
+for details.</p>
+</div>
+<div class="section" id="installing">
+<h1>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h1>
+<p>This should do the trick:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">tableprinter</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="documentation-contents">
+<h1>Documentation Contents<a class="headerlink" href="#documentation-contents" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="dataformat.html">Data Format</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dataformat.html#cell-data">Cell Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_formats.html">Output Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="output_common.html">Common Output Formatting Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output_ascii.html">ASCII / Unicode output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output_html.html">HTML Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output_latex.html">LaTeX Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example_simple.html">A Simple Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_simple.html#text-output">Text Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_simple.html#html-output">HTML Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_simple.html#latex-output">LaTeX Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_hierarchic.html">An Example of Hierarchic Data</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -67,6 +91,14 @@ a look at the <a class="reference internal" href="#examples"><span class="std st
 <li><a class="reference internal" href="example_hierarchic.html#example-hierarchic"><span class="std std-ref">An Example of Hierarchic Data</span></a></li>
 </ul>
 </div>
+<div class="section" id="id2">
+<h1>Resources<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/tinloaf/tableprinter">Source code on Github</a></li>
+<li><a class="reference external" href="https://github.com/tinloaf/tableprinter/issues">Issue tracker</a></li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/tableprinter">PyPi package</a></li>
+</ul>
+</div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
@@ -74,7 +106,7 @@ a look at the <a class="reference internal" href="#examples"><span class="std st
 <li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
-</div>
+<a href="https://github.com/tinloaf/tableprinter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a></div>
 
 
           </div>
@@ -87,12 +119,14 @@ a look at the <a class="reference internal" href="#examples"><span class="std st
                         title="next chapter">Data Format</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -108,12 +142,12 @@ a look at the <a class="reference internal" href="#examples"><span class="std st
         <li class="right" >
           <a href="dataformat.html" title="Data Format"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">tableprinter 0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">tableprinter 0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Lukas Barth.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.0.
     </div>
   </body>
 </html>
