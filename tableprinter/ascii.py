@@ -11,6 +11,7 @@ class ASCIIPrinter(Tabulator):
     ASCII_DEFAULT_OPTIONS = {
         'float_places': 2,
         'cell-align-horizontal': 'c',
+        'enable_unicode': True,
     }
 
     def _ascii_format_cell(self, contents, options):
@@ -29,6 +30,91 @@ class ASCIIPrinter(Tabulator):
             contents = {self._value_dimension: contents}
 
         return format_val(contents[self._value_dimension])
+
+    _UNICODE_CHARS = {
+        'bold':
+            {(True, True, True, True): '╋',
+             (True, True, True, False): '┣',
+             (True, True, False, True): '┻',
+             (True, True, False, False): '┗',
+             (True, False, True, True): '┫',
+             (True, False, True, False): '┃',
+             (True, False, False, True): '┛',
+             (True, False, False, False): '╹',
+             (False, True, True, True): '┳',
+             (False, True, True, False): '┏',
+             (False, True, False, True): '━',
+             (False, True, False, False): '╺',
+             (False, False, True, True): '┓',
+             (False, False, True, False): '╻',
+             (False, False, False, True): '╸',
+             (False, False, False, False): ' ',
+             },
+        'normal':
+            {(True, True, True, True): '┼',
+             (True, True, True, False): '├',
+             (True, True, False, True): '┴',
+             (True, True, False, False): '└',
+             (True, False, True, True): '┤',
+             (True, False, True, False): '│',
+             (True, False, False, True): '┘',
+             (True, False, False, False): '╵',
+             (False, True, True, True): '┬',
+             (False, True, True, False): '┌',
+             (False, True, False, True): '─',
+             (False, True, False, False): '╶',
+             (False, False, True, True): '┐',
+             (False, False, True, False): '╷',
+             (False, False, False, True): '╴',
+             (False, False, False, False): ' ',
+             },
+    }
+
+    _ASCII_CHARS = {
+        'bold':
+            {(True, True, True, True): '#',
+             (True, True, True, False): '+',
+             (True, True, False, True): '+',
+             (True, True, False, False): '#',
+             (True, False, True, True): '+',
+             (True, False, True, False): '|',
+             (True, False, False, True): '+',
+             (True, False, False, False): '|',
+             (False, True, True, True): '+',
+             (False, True, True, False): '+',
+             (False, True, False, True): '=',
+             (False, True, False, False): '=',
+             (False, False, True, True): '#',
+             (False, False, True, False): '|',
+             (False, False, False, True): '=',
+             (False, False, False, False): ' ',
+             },
+        'normal':
+            {(True, True, True, True): '+',
+             (True, True, True, False): '+',
+             (True, True, False, True): '+',
+             (True, True, False, False): '+',
+             (True, False, True, True): '+',
+             (True, False, True, False): '|',
+             (True, False, False, True): '+',
+             (True, False, False, False): '|',
+             (False, True, True, True): '+',
+             (False, True, True, False): '+',
+             (False, True, False, True): '-',
+             (False, True, False, False): '-',
+             (False, False, True, True): '+',
+             (False, False, True, False): '|',
+             (False, False, False, True): '-',
+             (False, False, False, False): ' ',
+             },
+    }
+
+    def _ascii_char(self, up, right, down, left, options, weight='normal'):
+        if options.get('enable_unicode', True):
+            return ASCIIPrinter._UNICODE_CHARS[weight][(up,right,down,left)]
+        else:
+            return ASCIIPrinter._ASCII_CHARS[weight][(up,right,down,left)]
+
 
     def _ascii_compute_column_widths(self, options):
         # TODO make a list
@@ -135,44 +221,70 @@ class ASCIIPrinter(Tabulator):
     def _ascii_row_position(self, row):
         return sum(self._ascii_rowheights[r] for r in range(0,row)) + row + 1
 
-    def _ascii_draw_borders(self):
+    def _ascii_draw_borders(self, options):
         sorted_rows, left_labels = self._make_rows()
         sorted_cols, top_labels = self._make_cols()
 
-        self._ascii_print_to_matrix(0, 0, "=" * self._ascii_total_width)
-        self._ascii_print_to_matrix(0, self._ascii_total_height - 1, "=" * self._ascii_total_width)
+        self._ascii_print_to_matrix(0, 0,
+                        self._ascii_char(False, True, False, True, options, 'bold') * self._ascii_total_width)
+        self._ascii_print_to_matrix(0, self._ascii_total_height - 1,
+                        self._ascii_char(False, True, False, True, options, 'normal') * self._ascii_total_width)
 
         x = 0
+        # Draw vertical lines between columns
         for i in range(0, len(sorted_cols) + 1):
             for y in range(0, self._ascii_total_height):
-                if y == 0 or y == self._ascii_total_height - 1:
-                    self._ascii_print_to_matrix(x, y, "+")
+                if y < self._ascii_rowheights[0] + 2:
+                    weight = 'bold'
                 else:
-                    self._ascii_print_to_matrix(x, y, "|")
+                    weight = 'normal'
+                if y == 0 or y == self._ascii_total_height - 1:
+                    ch = self._ascii_char(
+                        y == self._ascii_total_height - 1,
+                        x < self._ascii_total_width,
+                        y < self._ascii_total_height - 1,
+                        x > 0,
+                        options, weight=weight
+                    )
+                    self._ascii_print_to_matrix(x, y, ch)
+                else:
+                    self._ascii_print_to_matrix(x, y, self._ascii_char(True, False, True, False, options,
+                                                                       weight=weight))
             x += self._ascii_colwidths[i] + 1
 
+        # Rightmost vertical line
         for y in range(0, self._ascii_total_height):
-            if y == 0 or y == self._ascii_total_height - 1:
-                self._ascii_print_to_matrix(x, y, "+")
+            if y < self._ascii_rowheights[0] + 2:
+                weight = 'bold'
             else:
-                self._ascii_print_to_matrix(x, y, "|")
+                weight = 'normal'
+            if y == 0 or y == self._ascii_total_height - 1:
+                self._ascii_print_to_matrix(x, y,
+                    self._ascii_char(y > 0, False, y == 0, True, options, weight=weight))
+            else:
+                self._ascii_print_to_matrix(x, y, self._ascii_char(True, False, True, False, options, weight=weight))
 
-        self._ascii_matrix[0] = '+'
-        self._ascii_matrix[self._ascii_total_width - 1] = '+'
-        self._ascii_matrix[-1] = '+'
-        self._ascii_matrix[-1 * (self._ascii_total_width )] = '+'
+        self._ascii_matrix[0] = self._ascii_char(False, True, True, False, options, weight='bold')
+        self._ascii_matrix[self._ascii_total_width - 1] = self._ascii_char(False, False, True, True, options, weight='bold')
+        self._ascii_matrix[-1] = self._ascii_char(True, False, False, True, options)
+        self._ascii_matrix[-1 * (self._ascii_total_width )] = self._ascii_char(True, True, False, False, options)
 
     def _ascii_draw_row(self, row_no, sorted_rows, sorted_cols, options):
         row = sorted_rows[row_no - 1]
         coord_y = self._ascii_row_position(row_no)
 
         # TODO don't generate this for every row…
-        border = "|" + " " * (self._ascii_colwidths[0]) + "+"
+        border = self._ascii_char(True, False, True, False, options) + " " * (self._ascii_colwidths[0]) + \
+            self._ascii_char(True, True, True, False, options)
 
         cell_align = options.get('cell-align-horizontal', 'c')
 
         for col_no, col in enumerate(sorted_cols, start=1):
-            border += "-" * (self._ascii_colwidths[col_no]) + "+"
+            border += self._ascii_char(False, True, False, True, options) * (self._ascii_colwidths[col_no])
+            if (col_no < len(sorted_cols)):
+                border += self._ascii_char(True, True, True, True, options)
+            else:
+                border += self._ascii_char(True, False, True, True, options)
 
             if (row,col) not in self._cells:
                 # TODO print empty symbol?
@@ -200,11 +312,11 @@ class ASCIIPrinter(Tabulator):
         if row_no < len(sorted_rows):
             self._ascii_print_to_matrix(0, coord_y + self._ascii_rowheights[row_no], border)
 
-    def _ascii_draw_top_labels(self, top_labels):
-        border = "+"
-        for colwidth in self._ascii_colwidths.values():
-            border += "=" * colwidth
-            border += "+"
+    def _ascii_draw_top_labels(self, top_labels, options):
+        border = str(self._ascii_char(True, True, True, False, options, weight='bold'))
+        for (i, colwidth) in enumerate(self._ascii_colwidths.values(), start=1):
+            border += self._ascii_char(False, True, False, True, options, weight='bold') * colwidth
+            border += self._ascii_char(True, (i < len(self._ascii_colwidths)), True, True, options, weight='bold')
         border_y_coord = self._ascii_row_position(0) + self._ascii_rowheights[0]
         self._ascii_print_to_matrix(0, border_y_coord, border)
 
@@ -223,7 +335,7 @@ class ASCIIPrinter(Tabulator):
 
                 col_no += colspan
 
-    def _ascii_draw_left_labels(self, left_labels):
+    def _ascii_draw_left_labels(self, left_labels, options):
         # First: Compute the width of the individual dimensions
         dimension_widths = []
         for d in range(0, len(self._y)):
@@ -247,7 +359,8 @@ class ASCIIPrinter(Tabulator):
                 self._ascii_print_to_matrix(x_coord, y_coord, row_label)
                 row_no += rowspan
                 if label_no < len(left_labels[d]) - 1:
-                    self._ascii_print_to_matrix(x_coord, border_y_coord, "-" * dimension_widths[d])
+                    self._ascii_print_to_matrix(x_coord, border_y_coord,
+                            self._ascii_char(False, True, False, True, options) * dimension_widths[d])
 
 
 
@@ -263,13 +376,13 @@ class ASCIIPrinter(Tabulator):
 
         self._ascii_matrix = [ " " for i in range(0, self._ascii_total_height * self._ascii_total_width)]
 
-        self._ascii_draw_borders()
+        self._ascii_draw_borders(options)
 
         for (row_no, row) in enumerate(sorted_rows, start=1):
             self._ascii_draw_row(row_no, sorted_rows, sorted_cols, options)
 
-        self._ascii_draw_top_labels(top_labels)
-        self._ascii_draw_left_labels(left_labels)
+        self._ascii_draw_top_labels(top_labels, options)
+        self._ascii_draw_left_labels(left_labels, options)
 
         with_breaks = [x for y in (self._ascii_matrix[i:i+self._ascii_total_width] + ['\n'] for
                         i in range(0, len(self._ascii_matrix), self._ascii_total_width)) for x in y]
