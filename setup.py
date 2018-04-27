@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='tableprinter',
-      version='0.2',
+      version='0.3',
       description='Yet another python table printer. This one outputs your tables to HTML, LaTeX, Unicode and ASCII. It can deal with hierarchical rows / columns, output in color, ...',
       url='https://github.com/tinloaf/tableprinter',
       author='Lukas Barth',
