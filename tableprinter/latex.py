@@ -70,11 +70,28 @@ class LatexPrinter(Tabulator):
 \\toprule
 """.format(column_str)
 
+        if len(self._x) == 1 and len(self._x_labels[0].get('dimension', "")) > 0:
+            # Label the single X dimension on top
+            label = self._x_labels[0].get('dimension', "")
+            latex_str += "\\multicolumn{{ {} }}{{c}}{{}}".format(left_label_count) # Empty space above y-dimension columns
+            latex_str += "& \\multicolumn{{ {} }}{{c}}{{ {} }}".format(len(sorted_cols), label)
+            latex_str += "\\\\ \n"
+            latex_str += "\\cmidrule(lr){{ {} - {} }} ".format(left_label_count + 1, left_label_count + len(sorted_cols))
+            latex_str += "\n"
+
         for i in range(0, len(self._x)):
             label = self._x_labels[i].get('dimension', "")
 
-            # Label
-            latex_str += "\\multicolumn{{ {} }}{{c}}{{ {} }} ".format(left_label_count, label)
+            if i < len(self._x) - 1:
+                # Don't need to label the y-dimensions in this row
+                latex_str += "\\multicolumn{{ {} }}{{c}}{{ {} }} ".format(left_label_count, label)
+            else:
+                # First, label y dimensions
+                for y_dim in range(0, len(self._y)):
+                    y_label = self._y_labels[y_dim].get('dimension', "")
+                    if y_dim > 0:
+                        latex_str += " & "
+                    latex_str += y_label
 
             column = left_label_count + 1
             midrules = []

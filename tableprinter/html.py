@@ -49,6 +49,12 @@ class HTMLPrinter(Tabulator):
         return cell_str
 
     def as_html(self, options=HTML_DEFAULT_OPTIONS):
+        """
+        Formats the table as an HTML table.
+
+        :param options:  Formatting options. See the :ref:`formatting options documentation <output_formats>` for details.
+        :return: An HTML table
+        """
         sorted_rows, left_labels = self._make_rows()
         sorted_cols, top_labels = self._make_cols()
 
@@ -61,11 +67,41 @@ class HTMLPrinter(Tabulator):
         #
         # Output table header
         #
+        if len(self._x) == 1 and len(self._x_labels[0].get('dimension', "")) > 0:
+            # Label the single X dimension on top
+            label = self._x_labels[0].get('dimension', "")
+            html_str += "<tr>"
+
+            html_str += "<th colspan=\"{}\"></th>".format(left_label_count)  # Empty space above y-dimension columns
+
+            cell_style_str = "padding: 0px; text-align: center;"
+
+            div_style_str = "border-bottom: 1px solid black;"
+            div_style_str += "margin-left: 3px; margin-right: 7px;"
+
+            html_str += "<th colspan=\"{}\" style=\"{}\">" \
+                .format(len(sorted_cols), cell_style_str)
+            html_str += "<div style=\"{}\">".format(div_style_str)
+
+            html_str += "{}".format(label)
+
+            html_str += "</div></th>"
+
+            html_str += "</tr>"
+            html_str += "\n"
+
+
         for i in range(0, len(self._x)):
             label = self._x_labels[i].get('dimension', "")
 
-            # Label
-            html_str += "<tr> <th class=\"toplabel\" colspan=\"{}\">{}</th>".format(left_label_count, label)
+            if i < len(self._x) - 1:
+                # Don't need to label the y-dimensions in this row
+                html_str += "<tr> <th class=\"toplabel\" colspan=\"{}\">{}</th>".format(left_label_count, label)
+            else:
+                # First, label y dimensions
+                for y_dim in range(0, len(self._y)):
+                    y_label = self._y_labels[y_dim].get('dimension', "")
+                    html_str += "<th class=\"toplabel\">{}</th>".format(y_label)
 
             column = left_label_count + 1
             for (key, colspan) in top_labels[i]:

@@ -392,11 +392,23 @@ class ASCIIPrinter(Tabulator):
         return ascii_str
 
     def as_ascii(self, options=ASCII_DEFAULT_OPTIONS):
+        """
+        Formats the table as a textual table, using only ASCII characters.
+
+        :param options:  Formatting options. See the :ref:`formatting options documentation <output_formats>` for details.
+        :return: An ASCII table
+        """
         opts = dict(options)
         opts['enable_unicode'] = False
         return self.as_text(opts)
 
     def as_unicode(self, options=ASCII_DEFAULT_OPTIONS):
+        """
+        Formats the table as a textual table, using Unicode box-drawing characters.
+
+        :param options:  Formatting options. See the :ref:`formatting options documentation <output_formats>` for details.
+        :return: An Unicode table
+        """
         opts = dict(options)
         opts['enable_unicode'] = True
         return self.as_text(opts)
